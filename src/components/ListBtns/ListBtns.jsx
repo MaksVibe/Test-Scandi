@@ -1,16 +1,17 @@
+import { Link } from "react-router-dom";
 import Header from "../Header/Header";
 
-const ListBtns = () => {
+const ListBtns = ({ handleOpen }) => {
   return (
     <Header title="Product List">
-      <ul class="header__btns">
+      <ul className="header__btns">
         <li>
-          <button type="button" class="btn" data-add-btn>
+          <Link to="/addproduct" className="btn" onClick={handleOpen}>
             Add
-          </button>
+          </Link>
         </li>
         <li>
-          <button type="button" class="btn" id="delete-product-btn">
+          <button type="button" className="btn" id="delete-product-btn">
             mass delete
           </button>
         </li>

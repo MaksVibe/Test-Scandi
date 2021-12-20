@@ -1,18 +1,19 @@
 import Header from "../Header/Header";
+import { Link } from "react-router-dom";
 
-const ProdBtns = () => {
+const ProdBtns = ({ handleClose }) => {
   return (
-    <Header title="Product List">
-      <ul class="header__btns">
+    <Header title="Add Product">
+      <ul className="header__btns">
         <li>
-          <button type="button" class="btn" data-add-btn>
+          <button type="button" className="btn">
             save
           </button>
         </li>
         <li>
-          <button type="button" class="btn" id="delete-product-btn">
+          <Link to="/" exact className="btn" onClick={handleClose}>
             cancel
-          </button>
+          </Link>
         </li>
       </ul>
     </Header>
