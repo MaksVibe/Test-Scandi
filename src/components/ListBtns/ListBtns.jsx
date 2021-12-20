@@ -11,7 +11,7 @@ const ListBtns = ({ handleOpen }) => {
           </Link>
         </li>
         <li>
-          <button type="button" className="btn" id="delete-product-btn">
+          <button type="button" className="btn deleteBtn">
             mass delete
           </button>
         </li>

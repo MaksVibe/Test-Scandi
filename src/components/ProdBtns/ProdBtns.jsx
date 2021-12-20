@@ -6,9 +6,9 @@ const ProdBtns = ({ handleClose }) => {
     <Header title="Add Product">
       <ul className="header__btns">
         <li>
-          <button type="button" className="btn">
+          <Link to="/" exact className="btn">
             save
-          </button>
+          </Link>
         </li>
         <li>
           <Link to="/" exact className="btn" onClick={handleClose}>

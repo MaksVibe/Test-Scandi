@@ -2,13 +2,14 @@ import "./App.css";
 import CardForm from "./components/CardForm/CardForm";
 import ProdList from "./components/ProdList/ProdList";
 import React, { useState } from "react";
+import { get, save } from "./services/localStorage";
 import { Route, Routes } from "react-router-dom";
 import ListBtns from "./components/ListBtns/ListBtns";
 import ProdBtns from "./components/ProdBtns/ProdBtns";
 
 const App = () => {
   const [isAdd, setIsAdd] = useState(false);
-  const [product, setProduct] = useState({});
+  const [products, setProducts] = useState({});
 
   const handleOpen = () => {
     setIsAdd(true);
@@ -23,8 +24,8 @@ const App = () => {
       {!isAdd && <ListBtns handleOpen={handleOpen} />}
       {isAdd && <ProdBtns handleClose={handleClose} />}
       <Routes>
-        <Route path="/" exact element={<ProdList product={product} />} />
-        <Route path="/addproduct" exact element={<CardForm />} />
+        <Route path="/" exact element={<ProdList products={products} />} />
+        <Route path="/addproduct" element={<CardForm />} />
       </Routes>
     </div>
   );

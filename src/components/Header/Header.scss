@@ -1,0 +1,30 @@
+.header {
+  padding-top: 40px;
+  padding-bottom: 4px;
+  color: rgb(27, 27, 27);
+  border-bottom: 2px solid rgb(27, 27, 27);
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__btns {
+    font-size: 16px;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 20px;
+  }
+
+  &__name {
+    font-size: 36px;
+    font-weight: 300;
+  }
+}
+
+.deleteBtn {
+  font-size: 16px;
+  font-weight: 300;
+}

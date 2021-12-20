@@ -15,8 +15,28 @@ body {
 
 .btn {
   padding: 5px 10px;
-  border: 2px solid rgb(27, 27, 27);
+  border: 1px solid rgb(27, 27, 27);
   text-transform: uppercase;
   background-color: white;
-  box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 1);
+  box-shadow: 3px 3px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+input {
+  width: 100%;
+  max-width: 200px;
+  height: 25px;
+  margin: 5px 10px;
+  text-indent: 5px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: solid 1px #d3d3d3;
+  -webkit-transition: 0.3s; /* Safari */
+  transition: 0.3s;
+}
+input[type="text"]:hover {
+  box-shadow: 0 0 5pt 0.5pt #d3d3d3;
+}
+input[type="text"]:focus {
+  box-shadow: 0 0 5pt 2pt #d3d3d3;
+  outline-width: 0px;
 }
