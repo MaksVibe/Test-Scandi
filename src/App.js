@@ -2,7 +2,7 @@ import "./App.css";
 import CardForm from "./components/CardForm/CardForm";
 import ProdList from "./components/ProdList/ProdList";
 import React, { useState } from "react";
-import { get, save } from "./services/localStorage";
+import { get, save } from "./components/services/localStorage";
 import { Route, Routes } from "react-router-dom";
 import ListBtns from "./components/ListBtns/ListBtns";
 import ProdBtns from "./components/ProdBtns/ProdBtns";
