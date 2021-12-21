@@ -9,7 +9,13 @@ import ProdBtns from "./components/ProdBtns/ProdBtns";
 
 const App = () => {
   const [isAdd, setIsAdd] = useState(false);
-  const [products, setProducts] = useState({});
+  const [products, setProducts] = useState(null);
+
+  const addProduct = (product) => {
+    setProducts((prevProducts) => [...prevProducts, product]);
+  };
+
+  const handleSave = () => (products ? setIsAdd(true) : false);
 
   const handleOpen = () => {
     setIsAdd(true);
@@ -22,9 +28,13 @@ const App = () => {
   return (
     <div className="container">
       {!isAdd && <ListBtns handleOpen={handleOpen} />}
-      {isAdd && <ProdBtns handleClose={handleClose} />}
+      {isAdd && <ProdBtns handleClose={handleClose} handleSave={handleSave} />}
       <Routes>
-        <Route path="/" exact element={<ProdList products={products} />} />
+        <Route
+          path="/"
+          exact
+          element={products && <ProdList products={products} />}
+        />
         <Route path="/addproduct" element={<CardForm />} />
       </Routes>
     </div>

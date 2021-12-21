@@ -1,0 +1,24 @@
+{
+  "dvd": {
+    "sku": "JVC200123",
+    "name": "Acme DISC",
+    "price": "1.00 $",
+    "attribute": "Size: 700MB"
+  },
+  "book": {
+    "sku": "GGWP0007",
+    "name": "War and Peace",
+    "price": "20.00 $",
+    "attribute": "Weight: 2KG"
+  },
+  "furniture": {
+    "sku": "TR120555",
+    "name": "Chair",
+    "price": "40.00 $",
+    "dimension": {
+      "height": 24,
+      "width": 45,
+      "length": 15
+    }
+  }
+}
