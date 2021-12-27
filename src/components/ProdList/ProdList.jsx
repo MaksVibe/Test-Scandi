@@ -10,7 +10,6 @@ const ProdList = () => {
   const handleChange = (e) => {
     setChacked(e.target.parentNode.id);
   };
-  console.log(`chacked`, chacked);
 
   const handleClick = () => {
     deleteItems(chacked);
