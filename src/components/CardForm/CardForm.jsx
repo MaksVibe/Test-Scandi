@@ -63,7 +63,7 @@ const CardForm = () => {
             sku: skuQ,
             name: nameQ,
             price: priceQ,
-            dimension: `Dimension: ${heightQ}x${widthQ}x${lengthQ}`,
+            dimension: `${heightQ}x${widthQ}x${lengthQ}`,
           })
         ),
         history.goBack(),

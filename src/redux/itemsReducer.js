@@ -6,7 +6,7 @@ const itemsReducer = createSlice({
   reducers: {
     addItem: (state, { payload }) => [...state, payload],
     deleteItems: (state, { payload }) =>
-      state.filter((item) => item.id !== payload),
+      state.filter((item) => !payload.includes(item.id)),
   },
 });
 
