@@ -6,7 +6,7 @@ import { Route, Switch } from "react-router-dom";
 const App = () => {
   return (
     <Switch>
-      <Route path="/" exact>
+      <Route path="/test-scandi" exact>
         <ProdList />
       </Route>
 

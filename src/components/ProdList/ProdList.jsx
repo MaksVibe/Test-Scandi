@@ -5,14 +5,17 @@ import { useState } from "react";
 import { deleteItems } from "../../redux/itemsReducer";
 
 const ProdList = () => {
-  const [chacked, setChacked] = useState([]);
+  const [toDelete, setToDelete] = useState([]);
   const items = useSelector((state) => state.items.items);
+
   const handleChange = (e) => {
-    setChacked(e.target.parentNode.id);
+    toDelete.some((id) => id === e.target.parentNode.id)
+      ? toDelete.splice(toDelete.indexOf(e.target.parentNode.id), 1)
+      : setToDelete([...toDelete, e.target.parentNode.id]);
   };
 
   const handleClick = () => {
-    deleteItems(chacked);
+    deleteItems(toDelete);
   };
   return (
     <div className="container">

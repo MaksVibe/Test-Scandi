@@ -2,7 +2,7 @@
   "name": "test-scandi",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://MaksVibe.github.io/test-scandi",
+  "homepage": "https://MaksVibe.github.io/test-scandi/",
   "dependencies": {
     "@popperjs/core": "^2.11.0",
     "@reduxjs/toolkit": "^1.7.1",

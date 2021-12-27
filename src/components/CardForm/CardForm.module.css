@@ -8,9 +8,11 @@
   width: 100%;
   max-width: 150px;
   height: 25px;
+
   margin: 5px 10px;
   text-indent: 5px;
   font-size: 14px;
+
   border-radius: 5px;
   border: solid 1px #d3d3d3;
   -webkit-transition: 0.3s; /* Safari */

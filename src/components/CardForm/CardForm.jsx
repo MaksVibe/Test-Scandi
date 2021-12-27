@@ -148,7 +148,7 @@ const CardForm = () => {
     <div className="container">
       <ProdBtns handleSubmit={handleSubmit} />
       <form className={s.CardForm}>
-        <lable>
+        <label>
           SKU
           <input
             type="text"
@@ -157,8 +157,8 @@ const CardForm = () => {
             onChange={handleChange}
             required
           ></input>
-        </lable>
-        <lable>
+        </label>
+        <label>
           Name
           <input
             type="text"
@@ -167,8 +167,8 @@ const CardForm = () => {
             onChange={handleChange}
             required
           ></input>
-        </lable>
-        <lable>
+        </label>
+        <label>
           Price ($)
           <input
             type="text"
@@ -177,9 +177,9 @@ const CardForm = () => {
             onChange={handleChange}
             required
           ></input>
-        </lable>
-        <div>
-          <label htmlFor="types">Type Switcher</label>
+        </label>
+        <label htmlFor="types">
+          Type Switcher
           <select
             name="types"
             id="productType"
@@ -198,9 +198,9 @@ const CardForm = () => {
               Furniture
             </option>
           </select>
-        </div>
+        </label>
         {dvd && (
-          <lable>
+          <label>
             Size (MB)
             <input
               type="text"
@@ -209,11 +209,11 @@ const CardForm = () => {
               onChange={handleChange}
               required
             ></input>
-          </lable>
+          </label>
         )}
         {furniture && (
           <>
-            <lable>
+            <label>
               Height (CM)
               <input
                 type="text"
@@ -222,8 +222,8 @@ const CardForm = () => {
                 onChange={handleChange}
                 required
               ></input>
-            </lable>
-            <lable>
+            </label>
+            <label>
               Width (CM)
               <input
                 type="text"
@@ -232,8 +232,8 @@ const CardForm = () => {
                 onChange={handleChange}
                 required
               ></input>
-            </lable>
-            <lable>
+            </label>
+            <label>
               Length (CM)
               <input
                 type="text"
@@ -242,11 +242,11 @@ const CardForm = () => {
                 onChange={handleChange}
                 required
               ></input>
-            </lable>
+            </label>
           </>
         )}
         {book && (
-          <lable>
+          <label>
             Weight (KG)
             <input
               type="text"
@@ -255,7 +255,7 @@ const CardForm = () => {
               onChange={handleChange}
               required
             ></input>
-          </lable>
+          </label>
         )}
       </form>
     </div>
