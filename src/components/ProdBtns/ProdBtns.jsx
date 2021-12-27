@@ -1,25 +1,20 @@
 import Header from "../Header/Header";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-const ProdBtns = ({ handleClose, handleSave }) => {
+const ProdBtns = ({ handleSubmit }) => {
+  const history = useHistory();
   return (
     <Header title="Add Product">
       <ul className="header__btns">
         <li>
-          <Link
-            to="/"
-            exact
-            className="btn"
-            type="submit"
-            onSubmit={handleSave}
-          >
+          <button className="btn" type="submit" onClick={handleSubmit}>
             save
-          </Link>
+          </button>
         </li>
         <li>
-          <Link to="/" exact className="btn" onClick={handleClose}>
+          <button className="btn" onClick={() => history.goBack()}>
             cancel
-          </Link>
+          </button>
         </li>
       </ul>
     </Header>

@@ -1,23 +1,49 @@
-const ProdList = ({ products }) => {
+import "./ProdList.scss";
+import ListBtns from "../ListBtns/ListBtns";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { deleteItems } from "../../redux/itemsReducer";
+
+const ProdList = () => {
+  const [chacked, setChacked] = useState([]);
+  const items = useSelector((state) => state.items.items);
+  const handleChange = (e) => {
+    setChacked(e.target.parentNode.id);
+  };
+  console.log(`chacked`, chacked);
+
+  const handleClick = () => {
+    deleteItems(chacked);
+  };
   return (
-    <>
-      {!products && <p>Woops... There are no products, please, add some.</p>}
-      {products &&
-        products.map(({ sku, name, price, attribute, dimention }) => (
-          <ul>
-            <li key={sku}>
-              <p>{name}</p>
-              <p>{price}</p>
-              {attribute && <p>{attribute}</p>}
-              {dimention && (
-                <p>
-                  {dimention.hight}x{dimention.width}x{dimention.length}
-                </p>
-              )}
-            </li>
-          </ul>
-        ))}
-    </>
+    <div className="container">
+      <ListBtns handleClick={handleClick} />
+      <section className="products">
+        <ul className="products__list">
+          {!items && <p>Woops... There are no products, please, add some.</p>}
+          {items &&
+            items.map(({ id, sku, name, price, attribute, dimention }) => (
+              <li key={id} id={id} className="products__card">
+                <input
+                  type="checkbox"
+                  className="delete-checkbox"
+                  name="delete"
+                  id="check"
+                  onChange={handleChange}
+                />
+                <p>{name}</p>
+                <p>{price}</p>
+                {attribute && !dimention && <p>{attribute}</p>}
+                {dimention && !attribute && (
+                  <p>
+                    {dimention.hight}x{dimention.width}x{dimention.length}
+                  </p>
+                )}
+              </li>
+            ))}
+        </ul>
+      </section>
+    </div>
   );
 };
 

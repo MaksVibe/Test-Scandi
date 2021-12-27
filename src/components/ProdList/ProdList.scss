@@ -1,0 +1,58 @@
+.products {
+  padding-top: 25px;
+  padding-bottom: 60px;
+  &__list {
+    display: grid;
+    justify-items: center;
+    width: 100%;
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 50px;
+    @media screen and (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media screen and (min-width: 1200px) {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+  &__card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    line-height: 1.4;
+    border: 2px solid rgb(27, 27, 27);
+
+    @media screen and (min-width: 768px) {
+      max-width: 300px;
+    }
+    @media screen and (min-width: 1200px) {
+    }
+  }
+}
+
+.delete-checkbox {
+  position: absolute;
+  width: 16px;
+  top: 10px;
+  left: 10px;
+}
+// .delete-checkbox:after {
+//   content: " ";
+//   border: none;
+//   background-color: rgb(27, 27, 27);
+//   border-radius: 2px;
+//   display: inline-block;
+//   visibility: visible;
+// }
+
+// .delete-checkbox:checked:after {
+//   content: "✓";
+//   height: 13px;
+//   display: block;
+//   width: 13px;
+//   text-align: center;
+//   font-size: 10px;
+//   color: white;
+// }

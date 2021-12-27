@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import ProdBtns from "../ProdBtns/ProdBtns";
 import s from "./CardForm.module.css";
-import { get, save } from "../services/localStorage";
-
-const PRODUCTS = "products";
+import { addItem } from "../../redux/itemsReducer";
+import { nanoid } from "@reduxjs/toolkit";
+import { useHistory } from "react-router-dom";
 
 const CardForm = () => {
   const [dvd, setDvd] = useState(null);
@@ -11,55 +13,65 @@ const CardForm = () => {
   const [skuQ, setSkuQ] = useState("");
   const [nameQ, setNameQ] = useState("");
   const [priceQ, setPriceQ] = useState("");
-  const [typeQ, setTypeQ] = useState("");
   const [sizeQ, setSizeQ] = useState("");
   const [heightQ, setHeightQ] = useState("");
   const [widthQ, setWidthQ] = useState("");
   const [lengthQ, setLengthQ] = useState("");
   const [weightQ, setWeightQ] = useState("");
 
+  const noOneOfAttr = !skuQ.length || !nameQ.length || !priceQ.length;
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const handleSubmit = (e) => {
-    e.prevent.default();
-    console.log(`e.target`, e.target);
-    const localItems = get(PRODUCTS);
-    if (dvd) {
-      save({
-        dvd: {
-          sku: "JVC200123",
-          name: "Acme DISC",
-          price: "1.00 $",
-          attribute: "Size: 700MB",
-        },
-        ...localItems,
-      });
-      if (book) {
-        save({
-          book: {
-            sku: "GGWP0007",
-            name: "War and Peace",
-            price: "20.00 $",
-            attribute: "Weight: 2KG",
-          },
-          ...localItems,
-        });
-        if (furniture) {
-          save({
-            furniture: {
-              sku: "TR120555",
-              name: "Chair",
-              price: "40.00 $",
-              dimension: { height: 24, width: 45, length: 15 },
-            },
-            ...localItems,
-          });
-        }
-      }
-    }
+    e.preventDefault();
+    if (noOneOfAttr) return false;
+    if (dvd && !book && !furniture)
+      return (
+        dispatch(
+          addItem({
+            id: nanoid(5),
+            sku: skuQ,
+            name: nameQ,
+            price: priceQ,
+            attribute: `Size: ${sizeQ}`,
+          })
+        ),
+        history.goBack(),
+        reset()
+      );
+    if (book && !dvd && !furniture)
+      return (
+        dispatch(
+          addItem({
+            id: nanoid(5),
+            sku: skuQ,
+            name: nameQ,
+            price: priceQ,
+            attribute: `Weight: ${weightQ}`,
+          })
+        ),
+        history.goBack(),
+        reset()
+      );
+    if (furniture && !book && !dvd)
+      return (
+        dispatch(
+          addItem({
+            id: nanoid(5),
+            sku: skuQ,
+            name: nameQ,
+            price: priceQ,
+            dimension: `Dimension: ${heightQ}x${widthQ}x${lengthQ}`,
+          })
+        ),
+        history.goBack(),
+        reset()
+      );
   };
 
   const handleChange = (e) => {
-    console.log(`e.target.name`, e.target.name);
-    console.log(`e.target.value`, e.target.value);
     switch (e.target.name) {
       case "sku":
         setSkuQ(e.target.value);
@@ -117,43 +129,60 @@ const CardForm = () => {
     }
   };
 
+  const reset = () => {
+    setBook(null);
+    setDvd(null);
+    setFurniture(null);
+    setHeightQ("");
+    setLengthQ("");
+    setNameQ("");
+    setPriceQ("");
+    setSizeQ("");
+    setSkuQ("");
+    setWeightQ("");
+    setWidthQ("");
+    document.getElementById("productType").selectedIndex = 0;
+  };
+
   return (
-    <form className={s.CardForm} onSubmit={handleSubmit}>
-      <lable>
-        SKU
-        <input
-          type="text"
-          name="sku"
-          value={skuQ}
-          onChange={handleChange}
-          required
-        ></input>
-      </lable>
-      <lable>
-        Name
-        <input
-          type="text"
-          name="name"
-          value={nameQ}
-          onChange={handleChange}
-          required
-        ></input>
-      </lable>
-      <lable>
-        Price ($)
-        <input
-          type="text"
-          name="price"
-          value={priceQ}
-          onChange={handleChange}
-          required
-        ></input>
-      </lable>
-      <div>
-        <label htmlFor="types">
-          Type Switcher
+    <div className="container">
+      <ProdBtns handleSubmit={handleSubmit} />
+      <form className={s.CardForm}>
+        <lable>
+          SKU
+          <input
+            type="text"
+            name="sku"
+            value={skuQ}
+            onChange={handleChange}
+            required
+          ></input>
+        </lable>
+        <lable>
+          Name
+          <input
+            type="text"
+            name="name"
+            value={nameQ}
+            onChange={handleChange}
+            required
+          ></input>
+        </lable>
+        <lable>
+          Price ($)
+          <input
+            type="text"
+            name="price"
+            value={priceQ}
+            onChange={handleChange}
+            required
+          ></input>
+        </lable>
+        <div>
+          <label htmlFor="types">Type Switcher</label>
           <select
             name="types"
+            id="productType"
             className={s.FormSwitcher}
             onChange={changeProdType}
             required
@@ -169,67 +198,67 @@ const CardForm = () => {
               Furniture
             </option>
           </select>
-        </label>
-      </div>
-      {dvd && (
-        <lable>
-          Size (MB)
-          <input
-            type="text"
-            name="size"
-            value={sizeQ}
-            onChange={handleChange}
-            required
-          ></input>
-        </lable>
-      )}
-      {book && (
-        <>
+        </div>
+        {dvd && (
           <lable>
-            Height (CM)
+            Size (MB)
             <input
               type="text"
-              name="height"
-              value={heightQ}
+              name="size"
+              value={sizeQ}
               onChange={handleChange}
               required
             ></input>
           </lable>
+        )}
+        {furniture && (
+          <>
+            <lable>
+              Height (CM)
+              <input
+                type="text"
+                name="height"
+                value={heightQ}
+                onChange={handleChange}
+                required
+              ></input>
+            </lable>
+            <lable>
+              Width (CM)
+              <input
+                type="text"
+                name="width"
+                value={widthQ}
+                onChange={handleChange}
+                required
+              ></input>
+            </lable>
+            <lable>
+              Length (CM)
+              <input
+                type="text"
+                name="length"
+                value={lengthQ}
+                onChange={handleChange}
+                required
+              ></input>
+            </lable>
+          </>
+        )}
+        {book && (
           <lable>
-            Width (CM)
+            Weight (KG)
             <input
               type="text"
-              name="width"
-              value={widthQ}
+              name="weight"
+              value={weightQ}
               onChange={handleChange}
               required
             ></input>
           </lable>
-          <lable>
-            Length (CM)
-            <input
-              type="text"
-              name="length"
-              value={lengthQ}
-              onChange={handleChange}
-              required
-            ></input>
-          </lable>
-        </>
-      )}
-      {furniture && (
-        <lable>
-          Weight (KG)
-          <input
-            type="text"
-            name="weight"
-            value={weightQ}
-            onChange={handleChange}
-            required
-          ></input>
-        </lable>
-      )}
-    </form>
+        )}
+      </form>
+    </div>
   );
 };
 
